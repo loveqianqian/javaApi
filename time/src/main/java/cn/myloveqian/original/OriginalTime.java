@@ -1,5 +1,6 @@
 package cn.myloveqian.original;
 
+import java.text.spi.DateFormatProvider;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -111,11 +112,22 @@ public class OriginalTime {
         Instant instant = Instant.now();
         System.out.println("timestamp: " + instant);
 
+        /**
+         * 2014-01-16
+         * output:Date generated from String 20140116 is 2014-01-16
+         */
         String someDate = "20140116";
         LocalDate formatted = LocalDate.parse(someDate, DateTimeFormatter.BASIC_ISO_DATE);
+        DateTimeFormatter myFor = DateTimeFormatter.ofPattern("yyyy年MM月dd日");
+        LocalDate parse = LocalDate.parse("2014年01月16日", myFor);
+        System.out.println(parse);
         System.out.printf("Date generated from String %s is %s %n", someDate, formatted);
 
-        LocalDateTime arrivalDate  = LocalDateTime.now();
+        /**
+         * 一月 08 2017  11:36 下午
+         * output:Arriving at :  一月 08 2017  11:36 下午
+         */
+        LocalDateTime arrivalDate = LocalDateTime.now();
         try {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy  hh:mm a");
             String landing = arrivalDate.format(format);
